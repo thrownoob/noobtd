@@ -15,7 +15,7 @@ public class text {
 	Gentity gt=new Gentity();
 	gt.setName("晓");
     gt.setTnumber(15);
-
+   
     
     cons.add(gt);
 }
