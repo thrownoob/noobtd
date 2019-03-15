@@ -26,14 +26,14 @@ public class Dexservlet extends HttpServlet{
 	}
 	 
 	 @Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {//出入库
 		// TODO Auto-generated method stub
 		 
 //		 
 //		 req.setCharacterEncoding("utf-8");
 //		  //resp.setContentType("text/html;charset=utf-8");
 //		 resp.setCharacterEncoding("utf-8"); 
-		
+		//从网页取出数据
 		String tzhihang=req.getParameter("atzhihang");
 		String name=req.getParameter("aname");
 		String tnumber=req.getParameter("tnumber");
@@ -41,34 +41,36 @@ public class Dexservlet extends HttpServlet{
 		String tpers=req.getParameter("tname");
 		String biaoshi=req.getParameter("tip");
 		
-	  
+	  //。。对象
 		Consumables cs=new Consumables();
 		Gentity  gt = new Gentity();
-	
-	    
+	    int a = 0;
+	    //实体类赋值
 	    gt.setTip(Integer.valueOf(biaoshi));
 	    gt.setName(name);
 	    gt.setTnumber(Integer.valueOf(tnumber));
 	    gt.setTzhihang(tzhihang);
 	    gt.setCname(cpers);
 	    gt.setTname(tpers);
+	    //按name查余量表
 	    List<Gentity> ls=cs.axne(gt);
+	   for (Gentity gentity : ls) {
+		a=gentity.getCnumber();
+	}
 	    PrintWriter out = resp.getWriter();
-	    System.out.println(ls);
-	    if(ls.isEmpty()) {
-	    	if(gt.getTip()==10) {
+	    
+	    if(ls.isEmpty()) {//空的话验证是否为新增
+	    	if(gt.getTip()==10) {//新增
 	    		out.write(cs.add(gt));
-	    	//	cs.add(gt);
-	    	//	 req.getRequestDispatcher("index.jsp").forward(req, resp);
 	    	}else {
-	    		resp.sendRedirect("index.jsp");
+	    		//表内查不到数据 又不为新增
+	    		out.write("fail");
 	    	}
 	    	
 	    }else {
-	    	out.write(cs.dex(gt));
-	    	//cs.dex(gt);
-	    	// req.getRequestDispatcher("index.jsp").forward(req, resp);
-		}
+	    	//出入库
+	    	out.write(cs.dex(gt,a));
+	     }
 	   
 	    
 	    

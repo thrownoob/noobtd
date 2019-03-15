@@ -1,6 +1,7 @@
 package com.on.text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.on.dao.Consumables;
 import com.on.dao.Gentity;
@@ -13,10 +14,11 @@ public class text {
 	
 	Consumables cons=new Consumables();
 	Gentity gt=new Gentity();
-	gt.setName("晓");
-    gt.setTnumber(15);
-   
-    
-    cons.add(gt);
+	gt.setName("3108");
+      List<Gentity> ls= cons.axne(gt);
+    for (Gentity gentity : ls) {
+		int a= gentity.getCnumber();
+		System.out.println(a);
+	}
 }
 }

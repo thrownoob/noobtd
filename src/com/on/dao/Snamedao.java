@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Snamedao {
-    
+    //动态sql方法
 	public String Gentitywhere(Gentity gt) {
 		StringBuffer sbf=new StringBuffer();
 		if(gt.getName()!=null && gt.getName().trim().length()>0) {
@@ -31,7 +31,7 @@ public class Snamedao {
 		
 
 	}
-	
+	//动态填入sql
 	public void  Gentityget(Gentity gt,PreparedStatement pst)throws SQLException{
 		
 		int count =1; 

@@ -30,33 +30,35 @@ public class Snameservlet extends HttpServlet{
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {//记录表动态查询
 		// TODO Auto-generated method stub
+		//从页面获取信息
 		String name=req.getParameter("name");
 		String zname=req.getParameter("tzhihang");
 	    String ttime=req.getParameter("ttime");
 		String cname=req.getParameter("cname");
 		String tname=req.getParameter("tname");
-
+         //转码
 		 req.setCharacterEncoding("utf-8");
 		  resp.setContentType("text/html;charset=utf-8");
 		  resp.setCharacterEncoding("utf-8"); 
+		  //new一些对象
 		  Consumables cons = new Consumables();
 		  Gentity gt = new Gentity();
 		 Snamedao sd=new Snamedao();
+		 //放入实体类
 		 gt.setName(new String(name.getBytes("ISO-8859-1"),"UTF-8"));
-		 
-//		 gt.setName(new String(req.getParameter(name).getBytes("ISO-8859-1"),"UTF-8"));
-		 
-		 gt.setTzhihang(new String(zname.getBytes("ISO-8859-1"),"UTF-8"));
-		  gt.setTname(new String(tname.getBytes("ISO-8859-1"),"UTF-8"));
-		  gt.setTtime(new String(ttime.getBytes("ISO-8859-1"),"UTF-8"));
-		gt.setCname(new String(cname.getBytes("ISO-8859-1"),"UTF-8"));
+	     gt.setTzhihang(new String(zname.getBytes("ISO-8859-1"),"UTF-8"));
+		 gt.setTname(new String(tname.getBytes("ISO-8859-1"),"UTF-8"));
+		 gt.setTtime(new String(ttime.getBytes("ISO-8859-1"),"UTF-8"));
+		 gt.setCname(new String(cname.getBytes("ISO-8859-1"),"UTF-8"));
 	
 		resp.setContentType("text/json;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
+        //查询返回list
 		 ArrayList<Gentity> list = cons.axse(gt);
+		 //list转json格式
 		 String json=cons.djson(list);
 		 out.write(json);
 		 out.flush();

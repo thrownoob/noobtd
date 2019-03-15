@@ -55,8 +55,8 @@
             <div class="person_search">
                 <div class="search_input">
                     <div class="input-group mb-3">
-                        <span>姓名：</span>
-                        <input id="sname"  name="sname" type="text" class="form-control" placeholder="请输入姓名">
+                        <span>名称/型号：</span>
+                        <input id="sname"  name="sname" type="text" class="form-control" placeholder="请输入型号">
                     </div>
                 </div>
               

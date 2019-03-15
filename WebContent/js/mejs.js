@@ -1,6 +1,6 @@
 $(function () {
 
-    $('#add_btn').click(function () {
+    $('#add_btn').click(function () {//出入库按钮
         methods.addHandle()
     })
 
@@ -11,12 +11,12 @@ $(function () {
         methods.editHandle(trIndex);
     })
 
-    $('#search_btn').click(function () {
+    $('#search_btn').click(function () {//记录查询按钮
     	 
     	$("#tb  tr:not(:first)").html("");
         methods.seachName();
     })
-    $('#search_btn1').click(function () {
+    $('#search_btn1').click(function () {//余量查询
     	$("#tb  tr:not(:first)").html("");
    methods.seachName1();
     })
@@ -53,11 +53,11 @@ var addEnter = true,
 
 var methods = {
 
-    addHandle: function (the_index) {
+    addHandle: function (the_index) {//出入库
     	
     	 
     	 
-    if( methods.checkMustMes()== true){
+    if( methods.checkMustMes()== true){//非空判断为真
     		
     	$.ajax({
     		
@@ -66,23 +66,60 @@ var methods = {
     	    dataType:"",
     	    data: $('#form2').serialize(),
     	    success : function(data){
+//    	    	if(data=='ok'){
+//    	    		 bootbox.alert({
+//    	 	                title: "@gua",
+//    	 	                message: "操作成功",
+//    	 	               callback: function(){window.location.href="haocai.jsp"}
+//    	 	            })
+//    	 	            
+//    	    	}else{
+//    	    		if(data== 'nokey' ){ //库内有此数据
+//    	    			 bootbox.alert({
+//     	 	                title: "@gua",
+//     	 	                message: "库内已有请进行出入库操作",
+//     	 	                callback: function(){window.location.href="haocai.jsp"}
+//     	 	            })
+//    	    		}else{
+//    	    	 bootbox.alert({
+// 	                title: "@gua",
+// 	                message: "无此耗材请新增",
+// 	            })
+//    	    		}
+//    	    	}
     	    	if(data=='ok'){
-    	    		alert(data);
-    	    		 bootbox.alert({
-    	 	                title: "@gua",
-    	 	                message: "123",
-    	 	            })
-    	    	}else{
-    	    	 bootbox.alert({
- 	                title: "@gua",
- 	                message: "ok",
- 	            })
+    	    		bootbox.alert({
+	 	                title: "@gua",
+	 	                message: "操作成功",
+	 	               callback: function(){window.location.href="haocai.jsp"}
+	 	            })
     	    	}
+    	    	if(data== 'nokey'){
+    	    		 bootbox.alert({
+  	 	                title: "@gua",
+  	 	                message: "库内已有请进行出入库操作",
+  	 	            
+    	    	})
+    	    	}
+    	    	if(data== 'numer'){
+   	    		 bootbox.alert({
+ 	 	                title: "@gua",
+ 	 	                message: "余量不足",
+ 	 	                
+   	    	})
+   	    	}
+    	    	if(data== 'fail'){
+      	    		 bootbox.alert({
+    	 	                title: "@gua",
+    	 	                message: "无此耗材请新增",
+    	 	                
+      	    	})
+      	    	}
     	    },
     	error : function() {
                bootbox.alert({
 	                title: "@gua",
-	                message: "检查名称",
+	                message: "错误",
 	            })
             return false;
         }
@@ -167,7 +204,11 @@ var methods = {
     		
     	},
 	  error : function() {
-        alert("异常！");
+			bootbox.alert({
+                title: "@gua",
+                message: "异常",
+                
+            })
     }
      
      
@@ -189,7 +230,11 @@ var methods = {
 // 	    	    }
     	    	$.each(data,function(index,item){
     	    		if(item.name== "null"){
-    	    			alert("无此记录");
+    	    			bootbox.alert({
+        	                title: "@gua",
+        	                message: "无此记录",
+        	                
+        	            })
     	    		}else{
     	    			  var tr;
     	    	            tr += "<th>" + item.name + "</th>";
@@ -213,7 +258,11 @@ var methods = {
     	    	});
     	    	},
     	error : function() {
-            alert("异常！");
+    		bootbox.alert({
+                title: "@gua",
+                message: "异常",
+                
+            })
         }
     	     
     	    
@@ -221,31 +270,7 @@ var methods = {
     	})
     	
 
-//        var a = $('#show_tbody tr');
-//        var nameVal = $('#Ktext').val().trim();
-//        var nameStr = '',
-//            nameArr = [];
-//
-//        if (nameVal==='') {
-//            bootbox.alert({
-//                title: "来自火星的提示",
-//                message: "搜索内容不能为空",
-//                closeButton:false
-//            })
-//            return;
-//        }
-//
-//        for (var c=0;c<a.length;c++) {
-//            var txt = $('td:first', a.eq(c)).html().trim();
-//            nameArr.push(txt);
-//        }
-//
-//        a.hide();
-//        for (var i=0;i<nameArr.length;i++) {
-//            if (nameArr[i].indexOf(nameVal)>-1) {
-//                a.eq(i).show();
-//            }
-//        }
+
     },
     resectList: function () {
         $('#show_tbody tr').show();
