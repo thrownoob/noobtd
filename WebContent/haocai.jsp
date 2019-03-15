@@ -68,12 +68,12 @@
             <div class="person_search">
                 <div class="search_input">
                     <div class="input-group mb-3">
-                        <span>姓名：</span>
-                        <input id="name" name="name"  type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="form-control" placeholder="请输入姓名">
+                        <span>型号：</span>
+                        <input id="name" name="name"  type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="form-control" placeholder="请输入型号">
                           <span>支行：</span>
-                        <input id="tzhihang" name="tzhihang" onkeyup="this.value=this.value.replace(/\s+/g,'')" type="text" class="form-control" placeholder="请输入姓名">
+                        <input id="tzhihang" name="tzhihang" onkeyup="this.value=this.value.replace(/\s+/g,'')" type="text" class="form-control" placeholder="请输入支行">
                          <span>日期：</span>
-                        <input id="ttime" name="ttime"  type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="form-control" placeholder="请输入姓名">
+                        <input id="ttime" name="ttime"  type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="form-control" placeholder="请选择时间">
                         <span>申请人：</span>
                         <input id="cname" name="cname"  type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" class="form-control" placeholder="请输入姓名">
                          <span>办理人：</span>
@@ -160,8 +160,8 @@
                 <th>姓名</th>
                 <th>支行</th>
                 <th>数量</th>
-                <th>申请人</th>
-                <th>办理人</th>
+                <th>操作员</th>
+                <th>领取人</th>
                 <th>出库/入库</th>
                 <th>余量</th>
                 <th>日期</th>

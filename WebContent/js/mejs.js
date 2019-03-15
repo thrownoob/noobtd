@@ -297,13 +297,11 @@ var methods = {
     	            hasNullMes = true;
     	            return
     	        }
-    	 }else{
-    		 
-    		 
+    	 }
     	 
-    
-
-        if ($('.Name').val().trim()==='') {
+    	 if(aa=="1"){
+    	
+    	  if ($('.Name').val().trim()==='') {
             bootbox.alert({
                 title: "@gua",
                 message: "姓名为必选项，请填写",
@@ -349,6 +347,40 @@ var methods = {
             return
         }
     	 }
+    	 
+    	 if(aa=="0"){
+    		 if ($('.Name').val().trim()==='') {
+    	            bootbox.alert({
+    	                title: "@gua",
+    	                message: "姓名为必选项，请填写",
+    	                closeButton:false
+    	            })
+    	            hasNullMes = true;
+    	            return
+    	        }
+   		  if ($('.Number').val().trim()==='') {
+	            bootbox.alert({
+	                title: "@gua",
+	                message: "数量为必选项，请填写",
+	                closeButton:false
+	            })
+	            hasNullMes = true;
+	            return
+	            
+	        }
+   		 if ($('.Cname').val().trim()==='') {
+             bootbox.alert({
+                 title: "@gua",
+                 message: "操作员为必选项，请填写",
+                 closeButton:false
+             })
+             hasNullMes = true;
+             return
+         }
+	 
+    	 }
+    	 
+    	 
     	 return true;
     },
     checkRepeat: function () {

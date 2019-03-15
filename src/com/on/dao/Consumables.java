@@ -74,7 +74,7 @@ public class Consumables {
 			   ps.setString(1, gt.getName());
 			   ps.setInt(2, gt.getTnumber());
 			   ps.setString(3, Uuiddao.getUUID());
-			   //执行
+	          //执行
 			   ps.executeUpdate();
 			   ps.close();
 			   return "ok";
