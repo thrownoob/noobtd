@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mysql.cj.xdevapi.JsonArray;
 import com.on.dao.Consumables;
-import com.on.dao.Gentity;
+import com.on.bean.Gentity;
 
 import net.sf.json.JSONArray;
 

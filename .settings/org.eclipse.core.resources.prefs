@@ -1,8 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/fromtop.html=UTF-8
 encoding//WebContent/haocai.jsp=UTF-8
+encoding//src/com/on/bean/Gentity.java=UTF-8
 encoding//src/com/on/dao/Consumables.java=UTF-8
-encoding//src/com/on/dao/Gentity.java=UTF-8
 encoding//src/com/on/servlet/Dexservlet.java=UTF-8
 encoding//src/com/on/servlet/Snameservlet.java=UTF-8
 encoding/<project>=UTF-8

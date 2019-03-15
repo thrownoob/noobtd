@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.on.dao.Consumables;
-import com.on.dao.Gentity;
-
+import com.on.bean.Gentity;
 @WebServlet("/dexservlet")
 public class Dexservlet extends HttpServlet{
 	

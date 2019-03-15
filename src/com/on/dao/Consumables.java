@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.on.bean.Gentity;
 import com.on.jdbc.Dbhelp;
 import com.sun.org.apache.regexp.internal.recompile;
 

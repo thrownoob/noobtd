@@ -1,4 +1,4 @@
-package com.on.dao;
+package com.on.bean;
 
 
 

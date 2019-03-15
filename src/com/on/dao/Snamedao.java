@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.on.bean.Gentity;
+
 public class Snamedao {
     //动态sql方法
 	public String Gentitywhere(Gentity gt) {
