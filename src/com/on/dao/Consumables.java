@@ -90,7 +90,7 @@ public class Consumables {
 	 
 	 public String dex(Gentity y , int a) { //出入库变更
 		 
-		 String sql1 ="INSERT INTO jilu (name,ttime,tnumber,tzhihang,tname,cname,tip) VALUES (?,now(),?,?,?,?,?)";//记录添加 
+		 String sql1 ="INSERT INTO jilu (name,ttime,tnumber,tzhihang,tname,cname,tip,gcnum) VALUES (?,now(),?,?,?,?,?,(SELECT cnumber FROM haocai WHERE name = ?))";//记录添加 
 		 String sql2 = "UPDATE haocai SET cnumber=cnumber-? WHERE name=?";//出库操作余量 
 		 String sql3="UPDATE haocai SET cnumber=cnumber+? WHERE name=?";//入库操作余量
 		 String sql4="UPDATE jilu SET gcnum = (SELECT cnumber FROM haocai WHERE name = ?) WHERE ttime = now()";//记录实时余量
@@ -104,48 +104,90 @@ public class Consumables {
 				 return "nokey";//判断是否新增
 			 }
 			 else {
-		      //出入库添加纪录
-				PreparedStatement ps1=conn.prepareStatement(sql1);
-			    ps1.setString(1, y.getName()); 
-				ps1.setInt(2, y.getTnumber());
-				ps1.setString(3, y.getTzhihang());
-				ps1.setString(4, y.getTname());
-				ps1.setString(5, y.getCname());
-				ps1.setInt(6, y.getTip());
-				int cont=ps1.executeUpdate();//执行成功为1 失败为0
-				ps1.close();
-				  if(cont>0) {//成功
-					 if(y.getTip()==1) {//出库
-						 if(a>=y.getTnumber()) {
-							 
-							   PreparedStatement ps2= conn.prepareStatement(sql2);
-							   ps2.setInt(1, y.getTnumber());
-							   ps2.setString(2, y.getName());
-							   ps2.executeUpdate();//执行sql2改变余量
-							   PreparedStatement ps4= conn.prepareStatement(sql4);
-							   ps4.setString(1, y.getName());
-							   ps4.executeUpdate();//执行sql4记录实时余量
-							   ps2.close();
-							   ps4.close();
-						 }else {
-							 return "numer";
-						 }
-						
+				  if(y.getTip()==1) {//出库
+					 if(a>=y.getTnumber()) {
+						 
+						   PreparedStatement ps2= conn.prepareStatement(sql2);
+						   ps2.setInt(1, y.getTnumber());
+						   ps2.setString(2, y.getName());
+						   ps2.executeUpdate();//执行sql2改变余量
+						   PreparedStatement ps1= conn.prepareStatement(sql1);
+						   ps1.setString(1, y.getName()); 
+							ps1.setInt(2, y.getTnumber());
+							ps1.setString(3, y.getTzhihang());
+							ps1.setString(4, y.getTname());
+							ps1.setString(5, y.getCname());
+							ps1.setInt(6, y.getTip());
+							ps1.setString(7, y.getName());
+							ps1.executeUpdate();
+						   ps2.close();
+						   ps1.close();
+						 
 					 }else {
-						 if(y.getTip()==0){//入库
-							PreparedStatement ps3= conn.prepareStatement(sql3);
-							ps3.setInt(1, y.getTnumber());
-							ps3.setString(2, y.getName());
-							ps3.executeUpdate();//执行sql3改变余量
-							PreparedStatement ps4= conn.prepareStatement(sql4);
-							ps4.setString(1, y.getName());
-							ps4.executeUpdate();//执行sql4记录实时余量
-							ps3.close();
-							ps4.close();
-					  }
-					  
-				  }		
-				  }
+						 return "numer";
+					 }
+					
+				 }
+				if(y.getTip()==0) {
+					PreparedStatement ps3= conn.prepareStatement(sql3);
+					ps3.setInt(1, y.getTnumber());
+					ps3.setString(2, y.getName());
+					ps3.executeUpdate();//执行sql3改变余量
+					PreparedStatement ps1= conn.prepareStatement(sql1);
+					   ps1.setString(1, y.getName()); 
+						ps1.setInt(2, y.getTnumber());
+						ps1.setString(3, y.getTzhihang());
+						ps1.setString(4, y.getTname());
+						ps1.setString(5, y.getCname());
+						ps1.setInt(6, y.getTip());
+						ps1.setString(7, y.getName());
+						ps1.executeUpdate();
+					ps3.close();
+					ps1.close();
+				}
+				 
+		      //出入库添加纪录
+//				PreparedStatement ps1=conn.prepareStatement(sql1);
+//			    ps1.setString(1, y.getName()); 
+//				ps1.setInt(2, y.getTnumber());
+//				ps1.setString(3, y.getTzhihang());
+//				ps1.setString(4, y.getTname());
+//				ps1.setString(5, y.getCname());
+//				ps1.setInt(6, y.getTip());
+//				int cont=ps1.executeUpdate();//执行成功为1 失败为0
+//				ps1.close();
+//				  if(cont>0) {//成功
+//					 if(y.getTip()==1) {//出库
+//						 if(a>=y.getTnumber()) {
+//							 
+//							   PreparedStatement ps2= conn.prepareStatement(sql2);
+//							   ps2.setInt(1, y.getTnumber());
+//							   ps2.setString(2, y.getName());
+//							   ps2.executeUpdate();//执行sql2改变余量
+//							   PreparedStatement ps4= conn.prepareStatement(sql4);
+//							   ps4.setString(1, y.getName());
+//							   ps4.executeUpdate();//执行sql4记录实时余量
+//							   ps2.close();
+//							   ps4.close();
+//						 }else {
+//							 return "numer";
+//						 }
+//						
+//					 }else {
+//						 if(y.getTip()==0){//入库
+//							PreparedStatement ps3= conn.prepareStatement(sql3);
+//							ps3.setInt(1, y.getTnumber());
+//							ps3.setString(2, y.getName());
+//							ps3.executeUpdate();//执行sql3改变余量
+//							PreparedStatement ps4= conn.prepareStatement(sql4);
+//							ps4.setString(1, y.getName());
+//							ps4.executeUpdate();//执行sql4记录实时余量
+//							ps3.close();
+//							ps4.close();
+//					  }
+//					  
+//				  }		
+//				  }
 			 }
 			 } catch (SQLException e) {
 				e.printStackTrace();

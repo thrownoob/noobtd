@@ -47,14 +47,13 @@ public class Snameservlet extends HttpServlet{
 		  Gentity gt = new Gentity();
 		 Snamedao sd=new Snamedao();
 		 //放入实体类
-		 gt.setName(new String(name.getBytes("ISO-8859-1"),"UTF-8"));
-	     gt.setTzhihang(new String(zname.getBytes("ISO-8859-1"),"UTF-8"));
-		 gt.setTname(new String(tname.getBytes("ISO-8859-1"),"UTF-8"));
-		 gt.setTtime(new String(ttime.getBytes("ISO-8859-1"),"UTF-8"));
-		 gt.setCname(new String(cname.getBytes("ISO-8859-1"),"UTF-8"));
+		 gt.setName(new String(name));
+	     gt.setTzhihang(new String(zname));
+		 gt.setTname(new String(tname));
+		 gt.setTtime(new String(ttime));
+		 gt.setCname(new String(cname));
 	
-		resp.setContentType("text/json;charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
+
         PrintWriter out = resp.getWriter();
         //查询返回list
 		 ArrayList<Gentity> list = cons.axse(gt);
